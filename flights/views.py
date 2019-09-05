@@ -7,9 +7,13 @@ from .serializers import FlightSerializer, BookingSerializer, BookingDetailsSeri
 from .permissions import IsBookingOwner, IsChangable
 
 
+from rest_framework.filters import SearchFilter, OrderingFilter
+
 class FlightsList(ListAPIView):
 	queryset = Flight.objects.all()
 	serializer_class = FlightSerializer
+	filter_backends = [SearchFilter, OrderingFilter]
+	search_fields = ['destination']
 
 
 class BookingsList(ListAPIView):
